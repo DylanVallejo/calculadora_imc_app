@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,11 +21,11 @@ import java.util.Locale
 @Composable
 fun PantallaResultado(nombre: String, imc: Double, onVolver: () -> Unit) {
 
-    val categoria = when {
-        imc < 18.5 -> "Bajo peso"
-        imc < 25.0 -> "Peso normal"
-        imc < 30.0 -> "Sobrepeso"
-        else       -> "Obesidad"
+    val (categoria, colorCategoria) = when {
+        imc < 18.5 -> Pair("Bajo peso",   Color(0xFFE53935))
+        imc < 25.0 -> Pair("Peso normal", Color(0xFF43A047))
+        imc < 30.0 -> Pair("Sobrepeso",   Color(0xFFFB8C00))
+        else       -> Pair("Obesidad",    Color(0xFFE53935))
     }
 
     Column(
@@ -51,7 +52,12 @@ fun PantallaResultado(nombre: String, imc: Double, onVolver: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = categoria, fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
+        Text(
+            text = categoria,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = colorCategoria
+        )
 
         Spacer(modifier = Modifier.height(48.dp))
 
